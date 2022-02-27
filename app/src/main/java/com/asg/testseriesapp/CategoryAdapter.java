@@ -38,7 +38,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         final CategoryModel model = categoryModels.get(position);
 
-        holder.textView.setText(model.getCategoryName());
+        holder.textView1.setText(model.getCategoryName());
+        holder.textView2.setText(String.valueOf(model.getNoOfTests()+" Tests"));
         Glide.with(context)
                 .load(model.getCategoryImage())
                 .into(holder.imageView);
@@ -46,8 +47,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, McqActivity.class);
-                intent.putExtra("catId", model.getCategoryId());
+//                Intent intent = new Intent(context, McqActivity.class);
+//                intent.putExtra("catId", model.getCategoryId());
+//                context.startActivity(intent);
+                Intent intent = new Intent(context, TestActivity.class);
+                intent.putExtra("CAT_INDEX",holder.getAdapterPosition());
                 context.startActivity(intent);
             }
         });
@@ -60,12 +64,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public class CategoryViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView textView;
+        TextView textView1,textView2;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
-            textView = itemView.findViewById(R.id.category);
+            textView1 = itemView.findViewById(R.id.categoryName);
+            textView2 = itemView.findViewById(R.id.noOfTests);
         }
     }
 }
