@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.asg.testseriesapp.databinding.FragmentLeaderboardsBinding;
+
 public class LeaderboardsFragment extends Fragment {
 
     public LeaderboardsFragment() {
@@ -19,10 +21,13 @@ public class LeaderboardsFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    FragmentLeaderboardsBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_leaderboards, container, false);
+        binding = FragmentLeaderboardsBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 }
