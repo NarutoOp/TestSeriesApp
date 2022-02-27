@@ -47,8 +47,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, McqActivity.class);
-                intent.putExtra("catId", model.getCategoryId());
+//                Intent intent = new Intent(context, McqActivity.class);
+//                intent.putExtra("catId", model.getCategoryId());
+//                context.startActivity(intent);
+                Intent intent = new Intent(context, TestActivity.class);
+                intent.putExtra("CAT_INDEX",holder.getAdapterPosition());
                 context.startActivity(intent);
             }
         });
