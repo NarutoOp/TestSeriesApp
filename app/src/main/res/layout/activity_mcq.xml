@@ -6,10 +6,68 @@
     android:layout_height="match_parent"
     tools:context=".McqActivity">
 
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_timer"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="24"
+            android:textColor="@color/color_white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginStart="16dp"
+            android:text="GK"
+            android:textStyle="bold"
+            android:textColor="@color/color_white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/questionCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
+            android:drawableRight="@drawable/ic_question"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="right"
+            android:text="1/10"
+            android:textColor="@color/color_white"
+            android:textSize="20sp"
+            app:drawableTint="@color/color_white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
+
     <View
         android:id="@+id/view4"
         android:layout_width="wrap_content"
-        android:layout_height="130dp"
+        android:layout_height="200dp"
         android:background="@drawable/background_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,47 +78,35 @@
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:background="@drawable/rounded_box"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timer" />
+        app:layout_constraintTop_toBottomOf="@+id/topBar" />
 
-    <TextView
-        android:id="@+id/timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:drawableLeft="@drawable/ic_timer"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="24"
-        android:textColor="@color/color_white"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/view5"
+        app:layout_constraintStart_toStartOf="@+id/view5"
+        app:layout_constraintTop_toTopOf="@+id/view5"
+        app:srcCompat="@drawable/bookmark" />
 
-    <TextView
-        android:id="@+id/questionCounter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:drawableRight="@drawable/ic_question"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="1/10"
-        android:textColor="@color/color_white"
-        android:textSize="20sp"
-        app:drawableTint="@color/color_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/view5"
+        app:layout_constraintEnd_toEndOf="@+id/view5"
+        app:layout_constraintTop_toTopOf="@+id/view5"
+        app:srcCompat="@drawable/menubar" />
 
     <TextView
         android:id="@+id/question"
@@ -86,14 +132,16 @@
         android:id="@+id/option_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:background="@drawable/option_unselected"
         android:onClick="onClick"
         android:padding="15dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/view5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/view5"
-        app:layout_constraintTop_toBottomOf="@+id/view5" />
+        app:layout_constraintTop_toBottomOf="@+id/view5"
+        android:layout_marginTop="25dp"
+        />
 
     <TextView
         android:id="@+id/option_2"
@@ -145,7 +193,7 @@
         android:layout_marginRight="32dp"
         android:background="@drawable/button_2"
         android:onClick="onClick"
-        android:text="Next"
+        android:text="Mark for Review"
         android:textColor="@color/color_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -160,12 +208,48 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_1"
-        android:text="Quit"
+        android:text="Clear Selection"
         android:textColor="@color/color_white"
         app:layout_constraintEnd_toStartOf="@+id/nextBtn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/option_4" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:src="@drawable/left" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_border"
+            android:backgroundTint="#FFC107"
+            android:text="Submit"
+            android:textColor="@color/color_white" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:src="@drawable/right" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
