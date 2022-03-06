@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
     FirebaseAuth auth;
     ProgressDialog dialog;
+    String email, pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +41,16 @@ public class LoginActivity extends AppCompatActivity {
         binding.submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email, pass;
+
                 email = binding.emailBox.getText().toString();
                 pass = binding.passwordBox.getText().toString();
 
-
                 dialog.show();
+                if(validate()){
+                    login();
+                }
 
-                auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        dialog.dismiss();
-                        if(task.isSuccessful()) {
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            finish();
-                        } else {
-                            Toast.makeText(LoginActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+
             }
         });
 
@@ -69,4 +61,33 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    private boolean validate(){
+        if(email.isEmpty()){
+            binding.emailBox.setError("Enter Email ID");
+            return false;
+        }
+        if(pass.isEmpty()){
+            binding.passwordBox.setError("Enter Password");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void login(){
+        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                dialog.dismiss();
+                if(task.isSuccessful()) {
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 }
