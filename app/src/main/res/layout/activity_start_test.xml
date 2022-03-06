@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="@+id/view2" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/st_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
@@ -42,7 +42,7 @@
         app:layout_constraintTop_toTopOf="@+id/view3" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/st_testNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -60,7 +60,7 @@
         android:orientation="horizontal"
         android:layout_marginHorizontal="8dp"
         android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toTopOf="@+id/startTest"
+        app:layout_constraintBottom_toTopOf="@+id/startTestBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/ll2"
@@ -104,15 +104,15 @@
                     tools:ignore="RtlCompat" />
 
                 <TextView
+                    android:id="@+id/st_totalQues"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5"
                     android:layout_weight="1"
                     android:gravity="bottom"
+                    android:text="5"
                     android:textColor="#070707"
                     android:textSize="25sp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -155,15 +155,15 @@
                     tools:ignore="RtlCompat" />
 
                 <TextView
+                    android:id="@+id/st_bestScore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="80"
                     android:layout_weight="1"
                     android:gravity="bottom"
+                    android:text="80"
                     android:textColor="#070707"
                     android:textSize="25sp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -206,15 +206,15 @@
                     tools:ignore="RtlCompat" />
 
                 <TextView
+                    android:id="@+id/st_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="25 m"
                     android:layout_weight="1"
                     android:gravity="bottom"
+                    android:text="25 m"
                     android:textColor="#070707"
                     android:textSize="25sp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -222,7 +222,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/startTest"
+        android:id="@+id/startTestBtn"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
@@ -239,6 +239,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
+        android:id="@+id/st_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
