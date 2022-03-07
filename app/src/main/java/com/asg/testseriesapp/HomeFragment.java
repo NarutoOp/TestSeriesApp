@@ -37,10 +37,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
-        categories.add(new CategoryModel("","Mathematics","https://www.inventicons.com/uploads/iconset/1298/wm/512/Math-52.png",2));
-        categories.add(new CategoryModel("","Science","https://www.inventicons.com/uploads/iconset/1298/wm/512/Math-52.png", 3));
-        categories.add(new CategoryModel("","History", "https://www.inventicons.com/uploads/iconset/1298/wm/512/Math-52.png",4));
-        categories.add(new CategoryModel("","Language", "",1));
+        loadCategories();
 
         CategoryAdapter adapter = new CategoryAdapter(getContext(),categories);
 
@@ -48,5 +45,15 @@ public class HomeFragment extends Fragment {
         binding.categoryList.setAdapter(adapter);
 
         return binding.getRoot();
+    }
+
+    private void loadCategories() {
+        categories.clear();
+
+        categories.add(new CategoryModel("","Mathematics","https://www.inventicons.com/uploads/iconset/1298/wm/512/Math-52.png",2));
+        categories.add(new CategoryModel("","Science","https://www.inventicons.com/uploads/iconset/1298/wm/512/Math-52.png", 3));
+        categories.add(new CategoryModel("","History", "https://www.inventicons.com/uploads/iconset/1298/wm/512/Math-52.png",4));
+        categories.add(new CategoryModel("","Language", "",1));
+
     }
 }

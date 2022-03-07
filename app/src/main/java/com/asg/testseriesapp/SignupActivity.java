@@ -81,9 +81,21 @@ public class SignupActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(SignupActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(SignupActivity.this,MainActivity.class);
-                            startActivity(intent);
-                            SignupActivity.this.finish();
+                            DBQuery.createUserData(email, name, new MyCompleteListener() {
+                                @Override
+                                public void onSuccess() {
+                                    Intent intent = new Intent(SignupActivity.this,MainActivity.class);
+                                    startActivity(intent);
+                                    SignupActivity.this.finish();
+                                }
+
+                                @Override
+                                public void onFailure() {
+                                    Toast.makeText(SignupActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(SignupActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();

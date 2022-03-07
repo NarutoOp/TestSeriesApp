@@ -18,7 +18,7 @@ public class DBQuery {
     // Access a Cloud Firestore instance from your Activity
     public static FirebaseFirestore g_firestore;
 
-    public static void createUserData(String email,String name){
+    public static void createUserData(String email,String name, MyCompleteListener myCompleteListener){
 
         Map<String, Object> userData = new ArrayMap<>();
 
@@ -39,12 +39,13 @@ public class DBQuery {
                     @Override
                     public void onSuccess(Void unused) {
 
+                        myCompleteListener.onSuccess();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-
+                        myCompleteListener.onFailure();
                     }
                 });
     }
