@@ -50,6 +50,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 //                Intent intent = new Intent(context, McqActivity.class);
 //                intent.putExtra("catId", model.getCategoryId());
 //                context.startActivity(intent);
+                DBQuery.g_selected_cat_index = holder.getAdapterPosition();
                 Intent intent = new Intent(context, TestActivity.class);
                 intent.putExtra("CAT_INDEX",holder.getAdapterPosition());
                 context.startActivity(intent);

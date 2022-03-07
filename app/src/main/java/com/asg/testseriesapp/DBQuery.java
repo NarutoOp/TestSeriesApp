@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -22,6 +23,8 @@ public class DBQuery {
     // Access a Cloud Firestore instance from your Activity
     public static FirebaseFirestore g_firestore;
     public static ArrayList<CategoryModel> g_categoryList = new ArrayList<>();
+    public static List<TestModel> g_testList = new ArrayList<>();
+    public static int g_selected_cat_index = 0;
 
     public static void createUserData(String email,String name, MyCompleteListener myCompleteListener){
 
@@ -97,5 +100,39 @@ public class DBQuery {
                     }
                 });
 
+    }
+
+    public static void loadTestData(final MyCompleteListener myCompleteListener){
+        g_testList.clear();
+
+        String a = g_categoryList.get(g_selected_cat_index).getCategoryId();
+
+        g_firestore.collection("mcq").document(g_categoryList.get(g_selected_cat_index).getCategoryId())
+                .collection("testsList").document("testsInfo")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                        int noOfTests = g_categoryList.get(g_selected_cat_index).getNoOfTests();
+
+                        for(int i=1; i<= noOfTests; i++){
+                            g_testList.add(new TestModel(
+                                documentSnapshot.getString("test"+String.valueOf(i)+"Id"),
+                                0,
+                                documentSnapshot.getLong("test"+String.valueOf(i)+"Time").intValue()
+                            ));
+                        }
+
+                        myCompleteListener.onSuccess();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                        myCompleteListener.onFailure();
+                    }
+                });
     }
 }
