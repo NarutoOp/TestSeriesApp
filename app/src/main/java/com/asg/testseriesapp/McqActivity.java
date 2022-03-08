@@ -134,7 +134,6 @@ public class McqActivity extends AppCompatActivity {
     }
 
     private void init(){
-
         drawerLayout = findViewById(R.id.drawerLayout);
         drawerCloseBtn = findViewById(R.id.drawerClose);
         questionsView = findViewById(R.id.questionsView);
@@ -149,19 +148,19 @@ public class McqActivity extends AppCompatActivity {
         submitTestBtn = findViewById(R.id.submitTestBtn);
         nextQuesBtn = findViewById(R.id.nextQuesBtn);
 
-
         questionNum = 0;
         questionCounter.setText(String.format("%d/%d", 1, questions.size()));
         mcqCatName.setText(DBQuery.g_categoryList.get(DBQuery.g_selected_cat_index).getCategoryName());
-
 
     }
 
     private void setSnapHelper() {
         SnapHelper snapHelper = new PagerSnapHelper();
+
         snapHelper.attachToRecyclerView(questionsView);
 
         questionsView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
