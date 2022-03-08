@@ -2,6 +2,8 @@ package com.asg.testseriesapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,7 +11,12 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.asg.testseriesapp.databinding.ActivityMcqBinding;
 
@@ -18,28 +25,30 @@ import java.util.concurrent.TimeUnit;
 
 public class McqActivity extends AppCompatActivity {
 
-    ActivityMcqBinding binding;
 
     List<Question> questions = DBQuery.g_questionList;
     private int questionNum;
-    Question question;
     QuestionsAdapter quesAdapter;
-    int correctAnswers = 0;
+    private DrawerLayout drawerLayout;
+    private ImageButton drawerCloseBtn;
+    private RecyclerView questionsView;
+    private TextView timerTV, mcqCatName, questionCounter;
+    private ImageView qa_bookmark, quesListGridBtn, prevQuesBtn, nextQuesBtn;
+    private Button markBtn, clearSelection, submitTestBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMcqBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.questions_list_layout);
 
         init();
 
         quesAdapter = new QuestionsAdapter(DBQuery.g_questionList);
-        binding.questionsView.setAdapter(quesAdapter);
+        questionsView.setAdapter(quesAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        binding.questionsView.setLayoutManager(layoutManager);
+        questionsView.setLayoutManager(layoutManager);
 
         setSnapHelper();
 
@@ -62,7 +71,7 @@ public class McqActivity extends AppCompatActivity {
                                 TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(remainingTime))
                 );
 
-                binding.timer.setText(time);
+                timerTV.setText(time);
 
             }
 
@@ -78,25 +87,25 @@ public class McqActivity extends AppCompatActivity {
     }
 
     private void setClickListeners() {
-        binding.prevQuesBtn.setOnClickListener(new View.OnClickListener() {
+        prevQuesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(questionNum > 0){
-                    binding.questionsView.smoothScrollToPosition(questionNum-1);
+                    questionsView.smoothScrollToPosition(questionNum-1);
                 }
             }
         });
 
-        binding.nextQuesBtn.setOnClickListener(new View.OnClickListener() {
+        nextQuesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(questionNum < DBQuery.g_questionList.size() - 1){
-                    binding.questionsView.smoothScrollToPosition(questionNum+1);
+                    questionsView.smoothScrollToPosition(questionNum+1);
                 }
             }
         });
 
-        binding.clearSelection.setOnClickListener(new View.OnClickListener() {
+        clearSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DBQuery.g_questionList.get(questionNum).setSelectedAns(-1);
@@ -104,25 +113,60 @@ public class McqActivity extends AppCompatActivity {
                 quesAdapter.notifyDataSetChanged();
             }
         });
+
+        quesListGridBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!drawerLayout.isDrawerOpen(GravityCompat.END)){
+                    drawerLayout.openDrawer(GravityCompat.END);
+                }
+            }
+        });
+
+        drawerCloseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(drawerLayout.isDrawerOpen(GravityCompat.END)){
+                    drawerLayout.closeDrawer(GravityCompat.END);
+                }
+            }
+        });
     }
 
     private void init(){
+        drawerLayout = findViewById(R.id.drawerLayout);
+        drawerCloseBtn = findViewById(R.id.drawerClose);
+        questionsView = findViewById(R.id.questionsView);
+        timerTV = findViewById(R.id.timer);
+        mcqCatName = findViewById(R.id.mcqCatName);
+        questionCounter = findViewById(R.id.questionCounter);
+        qa_bookmark = findViewById(R.id.qa_bookmark);
+        quesListGridBtn = findViewById(R.id.quesListGridBtn);
+        prevQuesBtn = findViewById(R.id.prevQuesBtn);
+        markBtn = findViewById(R.id.markBtn);
+        clearSelection = findViewById(R.id.clearSelection);
+        submitTestBtn = findViewById(R.id.submitTestBtn);
+        nextQuesBtn = findViewById(R.id.nextQuesBtn);
+
         questionNum = 0;
-        binding.questionCounter.setText(String.format("%d/%d", 1, questions.size()));
-        binding.mcqCatName.setText(DBQuery.g_categoryList.get(DBQuery.g_selected_cat_index).getCategoryName());
+        questionCounter.setText(String.format("%d/%d", 1, questions.size()));
+        mcqCatName.setText(DBQuery.g_categoryList.get(DBQuery.g_selected_cat_index).getCategoryName());
+
     }
 
     private void setSnapHelper() {
         SnapHelper snapHelper = new PagerSnapHelper();
-        snapHelper.attachToRecyclerView(binding.questionsView);
 
-        binding.questionsView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        snapHelper.attachToRecyclerView(questionsView);
+
+        questionsView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 View view = snapHelper.findSnapView(recyclerView.getLayoutManager());
                 questionNum = recyclerView.getLayoutManager().getPosition(view);
-                binding.questionCounter.setText(String.format("%d/%d", (questionNum+1), questions.size()));
+                questionCounter.setText(String.format("%d/%d", (questionNum+1), questions.size()));
 
             }
 
