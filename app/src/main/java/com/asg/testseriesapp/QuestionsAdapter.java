@@ -37,7 +37,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
 
     public class QuestionsViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView ques, optionA, optionB, optionC, optionD;
+        private TextView ques, optionA, optionB, optionC, optionD, prevSelectedB;
 
         public QuestionsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -48,6 +48,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
             optionC = itemView.findViewById(R.id.option_3);
             optionD = itemView.findViewById(R.id.option_4);
 
+            prevSelectedB = null;
+
         }
 
         private void setData(final int pos){
@@ -56,6 +58,44 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
             optionB.setText((questionList.get(pos).getOption2()));
             optionC.setText((questionList.get(pos).getOption3()));
             optionD.setText((questionList.get(pos).getOption4()));
+
+            optionA.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    selectOption(optionA, 1, pos);
+
+                }
+            });
+
+            optionB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+
+            optionC.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+
+            optionD.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+        }
+
+        private void selectOption(TextView btn, int optionNum, int quesID){
+
+            if(prevSelectedB == null){
+                btn.setBackgroundResource(R.drawable.);
+            }
+
         }
     }
 }

@@ -7,12 +7,9 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.asg.testseriesapp.databinding.ActivityMcqBinding;
 
