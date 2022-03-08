@@ -42,8 +42,10 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, McqActivity.class);
-                intent.putExtra("catId", "1");
+                DBQuery.g_selected_test_index = holder.getAdapterPosition();
+
+                Intent intent = new Intent(context, StartTestActivity.class);
+//                intent.putExtra("catId", "1");
                 context.startActivity(intent);
             }
         });

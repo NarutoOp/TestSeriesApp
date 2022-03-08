@@ -25,6 +25,8 @@ public class DBQuery {
     public static ArrayList<CategoryModel> g_categoryList = new ArrayList<>();
     public static List<TestModel> g_testList = new ArrayList<>();
     public static int g_selected_cat_index = 0;
+    public static int g_selected_test_index = 0;
+    public static List<Question> g_questionList = new ArrayList<>();
 
     public static void createUserData(String email,String name, MyCompleteListener myCompleteListener){
 
@@ -131,6 +133,37 @@ public class DBQuery {
                     @Override
                     public void onFailure(@NonNull Exception e) {
 
+                        myCompleteListener.onFailure();
+                    }
+                });
+    }
+
+    public  static void loadQuestions(MyCompleteListener myCompleteListener)
+    {
+        g_firestore.collection("questions")
+                .whereEqualTo("category",g_categoryList.get(g_selected_cat_index).getCategoryId())
+                .whereEqualTo("test",g_testList.get(g_selected_test_index).getTestID())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for(DocumentSnapshot doc: queryDocumentSnapshots){
+                            g_questionList.add(new Question(
+                                    doc.getString("question"),
+                                    doc.getString("a"),
+                                    doc.getString("b"),
+                                    doc.getString("c"),
+                                    doc.getString("d"),
+                                    doc.getLong("answer").intValue()
+                            ));
+                        }
+
+                        myCompleteListener.onSuccess();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
                         myCompleteListener.onFailure();
                     }
                 });
