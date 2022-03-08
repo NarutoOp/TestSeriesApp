@@ -23,7 +23,7 @@ public class McqActivity extends AppCompatActivity {
     List<Question> questions = DBQuery.g_questionList;
     private int questionNum;
     Question question;
-//    CountDownTimer timer;
+    QuestionsAdapter quesAdapter;
     int correctAnswers = 0;
 
     @Override
@@ -34,7 +34,7 @@ public class McqActivity extends AppCompatActivity {
 
         init();
 
-        QuestionsAdapter quesAdapter = new QuestionsAdapter(DBQuery.g_questionList);
+        quesAdapter = new QuestionsAdapter(DBQuery.g_questionList);
         binding.questionsView.setAdapter(quesAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -93,6 +93,15 @@ public class McqActivity extends AppCompatActivity {
                 if(questionNum < DBQuery.g_questionList.size() - 1){
                     binding.questionsView.smoothScrollToPosition(questionNum+1);
                 }
+            }
+        });
+
+        binding.clearSelection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DBQuery.g_questionList.get(questionNum).setSelectedAns(-1);
+
+                quesAdapter.notifyDataSetChanged();
             }
         });
     }

@@ -59,6 +59,11 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
             optionC.setText((questionList.get(pos).getOption3()));
             optionD.setText((questionList.get(pos).getOption4()));
 
+            setOption(optionA, 1, pos);
+            setOption(optionB, 2, pos);
+            setOption(optionC, 3, pos);
+            setOption(optionD, 4, pos);
+
             optionA.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -71,21 +76,21 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
             optionB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    selectOption(optionB, 2, pos);
                 }
             });
 
             optionC.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    selectOption(optionC, 3, pos);
                 }
             });
 
             optionD.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    selectOption(optionD, 4, pos);
                 }
             });
         }
@@ -93,9 +98,38 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
         private void selectOption(TextView btn, int optionNum, int quesID){
 
             if(prevSelectedB == null){
-                btn.setBackgroundResource(R.drawable.);
+                btn.setBackgroundResource(R.drawable.option_selected);
+                DBQuery.g_questionList.get(quesID).setSelectedAns(optionNum);
+
+                prevSelectedB = btn;
+            }
+            else{
+                if(prevSelectedB.getId() == btn.getId()){
+
+                    btn.setBackgroundResource(R.drawable.option_unselected);
+                    DBQuery.g_questionList.get(quesID).setSelectedAns(-1);
+                    prevSelectedB = null;
+
+                }else {
+
+                    prevSelectedB.setBackgroundResource(R.drawable.option_unselected);
+                    btn.setBackgroundResource(R.drawable.option_selected);
+                    DBQuery.g_questionList.get(quesID).setSelectedAns(optionNum);
+                    prevSelectedB = btn;
+
+                }
+
             }
 
         }
+
+        private void setOption(TextView btn, int optionNum, int quesID){
+            if( DBQuery.g_questionList.get(quesID).getSelectedAns() == optionNum){
+                btn.setBackgroundResource(R.drawable.option_selected);
+            }else{
+                btn.setBackgroundResource(R.drawable.option_unselected);
+            }
+        }
+
     }
 }

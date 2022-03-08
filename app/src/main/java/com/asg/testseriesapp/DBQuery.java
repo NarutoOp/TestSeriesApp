@@ -156,7 +156,8 @@ public class DBQuery {
                                     doc.getString("b"),
                                     doc.getString("c"),
                                     doc.getString("d"),
-                                    doc.getLong("answer").intValue()
+                                    doc.getLong("answer").intValue(),
+                                    -1
                             ));
                         }
 
