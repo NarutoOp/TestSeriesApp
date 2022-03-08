@@ -2,6 +2,8 @@ package com.asg.testseriesapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,7 +11,9 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.asg.testseriesapp.databinding.ActivityMcqBinding;
 
@@ -22,15 +26,15 @@ public class McqActivity extends AppCompatActivity {
 
     List<Question> questions = DBQuery.g_questionList;
     private int questionNum;
-    Question question;
     QuestionsAdapter quesAdapter;
-    int correctAnswers = 0;
+    private DrawerLayout drawerLayout;
+    private ImageButton drawerCloseBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMcqBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.questions_list_layout);
 
         init();
 
@@ -104,12 +108,33 @@ public class McqActivity extends AppCompatActivity {
                 quesAdapter.notifyDataSetChanged();
             }
         });
+
+        binding.quesListGridBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!drawerLayout.isDrawerOpen(GravityCompat.END)){
+                    drawerLayout.openDrawer(GravityCompat.END);
+                }
+            }
+        });
+
+        drawerCloseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(drawerLayout.isDrawerOpen(GravityCompat.END)){
+                    drawerLayout.closeDrawer(GravityCompat.END);
+                }
+            }
+        });
     }
 
     private void init(){
         questionNum = 0;
         binding.questionCounter.setText(String.format("%d/%d", 1, questions.size()));
         binding.mcqCatName.setText(DBQuery.g_categoryList.get(DBQuery.g_selected_cat_index).getCategoryName());
+        drawerLayout = findViewById(R.id.drawerLayout);
+        drawerCloseBtn = findViewById(R.id.drawerClose);
+
     }
 
     private void setSnapHelper() {
