@@ -1,18 +1,25 @@
 package com.asg.testseriesapp;
 
 public class Question {
-    private String question, option1, option2, option3, option4, answer;
+    private String question, option1, option2, option3, option4;
+    private int answer, selectedAns;
 
-    public Question() {
-    }
-
-    public Question(String question, String option1, String option2, String option3, String option4, String answer) {
+    public Question(String question, String option1, String option2, String option3, String option4, int answer, int selectedAns) {
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;
         this.option3 = option3;
         this.option4 = option4;
         this.answer = answer;
+        this.selectedAns = selectedAns;
+    }
+
+    public int getSelectedAns() {
+        return selectedAns;
+    }
+
+    public void setSelectedAns(int selectedAns) {
+        this.selectedAns = selectedAns;
     }
 
     public String getQuestion() {
@@ -55,11 +62,11 @@ public class Question {
         this.option4 = option4;
     }
 
-    public String getAnswer() {
+    public int getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(int answer) {
         this.answer = answer;
     }
 }

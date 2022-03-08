@@ -3,15 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/background.xml" value="0.12" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/background_bottom.xml" value="0.1045" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/buton_border.xml" value="0.1" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/button_1.xml" value="0.1045" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/button_2.xml" value="0.1045" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/button_3.xml" value="0.1555" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/circle.xml" value="0.1" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/ic_bookmark_background.xml" value="0.1" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/ic_bookmark_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/ic_boomark.xml" value="0.229" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/ic_question.xml" value="0.1045" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/ic_right_menu_background.xml" value="0.229" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/ic_right_menu_foreground.xml" value="0.229" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/ic_timer.xml" value="0.1045" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/ic_trophy.xml" value="0.1045" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/main_background.xml" value="0.1" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/option_right.xml" value="0.1" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/option_selected.xml" value="0.1" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/option_unselected.xml" value="0.1045" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/option_wrong.xml" value="0.1" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/rounded_box.xml" value="0.1045" />
@@ -20,15 +31,20 @@
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/font/roboto_medium.xml" value="0.1935185185185185" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/activity_login.xml" value="0.2151268115942029" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/activity_mcq.xml" value="0.2151268115942029" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/activity_mcq.xml" value="0.1" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/activity_result.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/activity_signup.xml" value="0.1" />
-        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/fragment_home.xml" value="0.2151268115942029" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/activity_start_test.xml" value="0.2" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/activity_test.xml" value="0.2" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/fragment_leaderboards.xml" value="0.20244565217391305" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/fragment_profile.xml" value="0.18342391304347827" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/item_categor.xml" value="0.2151268115942029" />
-        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/item_category.xml" value="0.1" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/item_category.xml" value="0.2" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/question_item_layout.xml" value="0.2" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/questions_list_layout.xml" value="0.1" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/row_leaderboards.xml" value="0.20244565217391305" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/test_item_layout.xml" value="0.264" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/menu/menu.xml" value="0.23148148148148148" />
       </map>
     </option>

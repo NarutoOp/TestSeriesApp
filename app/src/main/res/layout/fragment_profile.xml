@@ -88,4 +88,15 @@
         app:layout_constraintStart_toStartOf="@+id/passBox"
         app:layout_constraintTop_toBottomOf="@+id/passBox" />
 
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Logout"
+        android:background="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateBtn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

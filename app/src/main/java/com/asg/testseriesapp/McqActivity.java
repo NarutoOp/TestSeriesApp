@@ -1,28 +1,29 @@
 package com.asg.testseriesapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
-import android.view.ViewDebug;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.asg.testseriesapp.databinding.ActivityMcqBinding;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class McqActivity extends AppCompatActivity {
 
     ActivityMcqBinding binding;
 
-    ArrayList<Question> questions;
-    int index = 0;
+    List<Question> questions = DBQuery.g_questionList;
+    private int questionNum;
     Question question;
-    CountDownTimer timer;
+    QuestionsAdapter quesAdapter;
     int correctAnswers = 0;
 
     @Override
@@ -31,110 +32,104 @@ public class McqActivity extends AppCompatActivity {
         binding = ActivityMcqBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        questions = new ArrayList<>();
+        init();
 
-        questions.add(new Question("What is math ?","Sub","Algorithm","Formula","Song","Sub"));
-        questions.add(new Question("What is a+b ?","Sub","Algorithm","Formula","Song","Formula"));
-        questions.add(new Question("What is History ?","Sub","Algorithm","Formula","Song","Sub"));
-        questions.add(new Question("What is Bellman Ford?","Sub","Algorithm","Formula","Song","Algorithm"));
-        questions.add(new Question("What is ice cream ?","Sub","Algorithm","Formula","Song","Song"));
+        quesAdapter = new QuestionsAdapter(DBQuery.g_questionList);
+        binding.questionsView.setAdapter(quesAdapter);
 
-        resetTimer();
-        setNextQuestion();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        binding.questionsView.setLayoutManager(layoutManager);
 
-//        Random random = new Random();
+        setSnapHelper();
+
+        setClickListeners();
+
+        startTimer();
 
     }
 
-    void resetTimer() {
-        timer = new CountDownTimer(30000,1000) {
+    private void startTimer() {
+        long totalTime = DBQuery.g_testList.get(DBQuery.g_selected_test_index).getTime()*60*1000;
+
+        CountDownTimer timer = new CountDownTimer(totalTime + 1000, 1000) {
             @Override
-            public void onTick(long millisUntilFinished) {
-                binding.timer.setText(String.valueOf(millisUntilFinished/1000));
+            public void onTick(long remainingTime) {
+
+                String time = String.format("%02d:%02d min",
+                        TimeUnit.MILLISECONDS.toMinutes(remainingTime),
+                        TimeUnit.MILLISECONDS.toSeconds(remainingTime) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(remainingTime))
+                );
+
+                binding.timer.setText(time);
+
             }
 
             @Override
             public void onFinish() {
 
+
+
             }
         };
-    }
-
-    void setNextQuestion(){
-        if(timer != null)
-            timer.cancel();
 
         timer.start();
-        if(index < questions.size()){
-            binding.questionCounter.setText(String.format("%d/%d", (index+1), questions.size()));
-            question = questions.get(index);
-            binding.question.setText(question.getQuestion());
-            binding.option1.setText(question.getOption1());
-            binding.option2.setText(question.getOption2());
-            binding.option3.setText(question.getOption3());
-            binding.option4.setText(question.getOption4());
-
-        }
     }
 
-    void showAnswer() {
-        if(question.getAnswer().equals(binding.option1.getText().toString()))
-            binding.option1.setBackground(getResources().getDrawable(R.drawable.option_right));
-        else if(question.getAnswer().equals(binding.option2.getText().toString()))
-            binding.option2.setBackground(getResources().getDrawable(R.drawable.option_right));
-        else if(question.getAnswer().equals(binding.option3.getText().toString()))
-            binding.option3.setBackground(getResources().getDrawable(R.drawable.option_right));
-        else if(question.getAnswer().equals(binding.option4.getText().toString()))
-            binding.option4.setBackground(getResources().getDrawable(R.drawable.option_right));
-    }
-
-    void checkAnswer(TextView textView) {
-        String selectedAnswer = textView.getText().toString();
-        if(selectedAnswer.equals(question.getAnswer())) {
-            correctAnswers++;
-            textView.setBackground(getResources().getDrawable(R.drawable.option_right));
-        } else {
-            showAnswer();
-            textView.setBackground(getResources().getDrawable(R.drawable.option_wrong));
-        }
-    }
-
-    void reset() {
-        binding.option1.setBackground(getResources().getDrawable(R.drawable.option_unselected));
-        binding.option2.setBackground(getResources().getDrawable(R.drawable.option_unselected));
-        binding.option3.setBackground(getResources().getDrawable(R.drawable.option_unselected));
-        binding.option4.setBackground(getResources().getDrawable(R.drawable.option_unselected));
-    }
-
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.option_1:
-            case R.id.option_2:
-            case R.id.option_3:
-            case R.id.option_4:
-                if (timer != null)
-                    timer.cancel();
-                TextView selected = (TextView) view;
-                checkAnswer(selected);
-
-                break;
-            case R.id.nextBtn:
-                reset();
-                if (index >= questions.size()-1) {
-                    Intent intent = new Intent(McqActivity.this, ResultActivity.class);
-                    intent.putExtra("correct", correctAnswers);
-                    intent.putExtra("total", questions.size());
-                    startActivity(intent);
-//                    Toast.makeText(this, "Quiz Finished.", Toast.LENGTH_SHORT).show();
-                } else {
-                    index++;
-                    String s = Integer.toString(index);
-                    Toast.makeText(this,s, Toast.LENGTH_SHORT).show();
-                    setNextQuestion();
-
+    private void setClickListeners() {
+        binding.prevQuesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(questionNum > 0){
+                    binding.questionsView.smoothScrollToPosition(questionNum-1);
                 }
-                break;
-        }
+            }
+        });
 
+        binding.nextQuesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(questionNum < DBQuery.g_questionList.size() - 1){
+                    binding.questionsView.smoothScrollToPosition(questionNum+1);
+                }
+            }
+        });
+
+        binding.clearSelection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DBQuery.g_questionList.get(questionNum).setSelectedAns(-1);
+
+                quesAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void init(){
+        questionNum = 0;
+        binding.questionCounter.setText(String.format("%d/%d", 1, questions.size()));
+        binding.mcqCatName.setText(DBQuery.g_categoryList.get(DBQuery.g_selected_cat_index).getCategoryName());
+    }
+
+    private void setSnapHelper() {
+        SnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(binding.questionsView);
+
+        binding.questionsView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                View view = snapHelper.findSnapView(recyclerView.getLayoutManager());
+                questionNum = recyclerView.getLayoutManager().getPosition(view);
+                binding.questionCounter.setText(String.format("%d/%d", (questionNum+1), questions.size()));
+
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
     }
 }
