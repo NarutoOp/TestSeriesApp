@@ -140,6 +140,8 @@ public class DBQuery {
 
     public  static void loadQuestions(MyCompleteListener myCompleteListener)
     {
+        g_questionList.clear();
+
         g_firestore.collection("questions")
                 .whereEqualTo("category",g_categoryList.get(g_selected_cat_index).getCategoryId())
                 .whereEqualTo("test",g_testList.get(g_selected_test_index).getTestID())
