@@ -6,16 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.asg.testseriesapp.databinding.ActivityResultBinding;
+import com.asg.testseriesapp.databinding.ActivityScoreBinding;
 
-public class ResultActivity extends AppCompatActivity {
+public class ScoreActivity extends AppCompatActivity {
 
-    ActivityResultBinding binding;
+    ActivityScoreBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityResultBinding.inflate(getLayoutInflater());
+        binding = ActivityScoreBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         int correctAnswers = getIntent().getIntExtra("correct", 0);
@@ -26,7 +26,7 @@ public class ResultActivity extends AppCompatActivity {
         binding.restartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ResultActivity.this, MainActivity.class));
+                startActivity(new Intent(ScoreActivity.this, MainActivity.class));
                 finishAffinity();
             }
         });

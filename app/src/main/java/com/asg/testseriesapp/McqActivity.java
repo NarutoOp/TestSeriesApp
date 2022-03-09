@@ -7,6 +7,7 @@ import static com.asg.testseriesapp.DBQuery.UNANSWERED;
 import static com.asg.testseriesapp.DBQuery.g_questionList;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Gravity;
@@ -42,6 +44,7 @@ public class McqActivity extends AppCompatActivity {
     private Button markBtn, clearSelection, submitTestBtn;
     private GridView quesListGV;
     private QuestionGridAdapter gridAdapter;
+    CountDownTimer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +75,7 @@ public class McqActivity extends AppCompatActivity {
     private void startTimer() {
         long totalTime = DBQuery.g_testList.get(DBQuery.g_selected_test_index).getTime()*60*1000;
 
-        CountDownTimer timer = new CountDownTimer(totalTime + 1000, 1000) {
+        timer = new CountDownTimer(totalTime + 1000, 1000) {
             @Override
             public void onTick(long remainingTime) {
 
@@ -88,9 +91,9 @@ public class McqActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-
-
-
+                Intent intent = new Intent(McqActivity.this, ScoreActivity.class);
+                startActivity(intent);
+                McqActivity.this.finish();
             }
         };
 
@@ -120,7 +123,8 @@ public class McqActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 g_questionList.get(questionNum).setSelectedAns(-1);
-
+                g_questionList.get(questionNum).setStatus(UNANSWERED);
+                markImage.setVisibility(View.GONE);
                 quesAdapter.notifyDataSetChanged();
             }
         });
@@ -164,6 +168,49 @@ public class McqActivity extends AppCompatActivity {
                 }
             }
         });
+
+        submitTestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitTest();
+            }
+        });
+    }
+
+    private void submitTest(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(McqActivity.this);
+        builder.setCancelable(true);
+
+        View view = getLayoutInflater().inflate(R.layout.alert_dialog_layout, null);
+
+        Button cancelB = view.findViewById(R.id.cancelBtn);
+        Button confirmB = view.findViewById(R.id.confirmBtn);
+
+        builder.setView(view);
+
+        AlertDialog alertDialog = builder.create();
+
+        cancelB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        confirmB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timer.cancel();
+                alertDialog.dismiss();
+
+                Intent intent = new Intent(McqActivity.this, ScoreActivity.class);
+                startActivity(intent);
+                McqActivity.this.finish();
+            }
+        });
+
+        alertDialog.show();
+
     }
 
     public void goToQuestion(int position){
@@ -194,6 +241,8 @@ public class McqActivity extends AppCompatActivity {
         questionNum = 0;
         questionCounter.setText(String.format("%d/%d", 1, questions.size()));
         mcqCatName.setText(DBQuery.g_categoryList.get(DBQuery.g_selected_cat_index).getCategoryName());
+
+        g_questionList.get(0).setStatus(UNANSWERED);
     }
 
     private void setSnapHelper()
@@ -212,6 +261,10 @@ public class McqActivity extends AppCompatActivity {
                 if(g_questionList.get(questionNum).getStatus() == NOT_VISITED)
                         g_questionList.get(questionNum).setStatus(UNANSWERED);
 
+                if(g_questionList.get(questionNum).getStatus() == REVIEW)
+                    markImage.setVisibility(View.VISIBLE);
+                else
+                    markImage.setVisibility(View.GONE);
 
                 questionCounter.setText(String.format("%d/%d", (questionNum+1), questions.size()));
             }
