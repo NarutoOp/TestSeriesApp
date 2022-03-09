@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/circle"
             tools:ignore="MissingConstraints"
-            app:tint="#5EF834" />
+            app:tint="@color/green" />
 
         <TextView
             android:id="@+id/textView4"
@@ -37,7 +37,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="27dp"
             android:text="Answered"
-            android:textColor="#5EF834"
+            android:textColor="@color/green"
             android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@+id/imageView9"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +46,7 @@
             android:id="@+id/imageView10"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            app:tint="@android:color/holo_red_dark"
+            app:tint="@color/red"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="128dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +60,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="27dp"
             android:text="UnAnswered"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="@color/red"
             android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@+id/imageView10"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,7 +69,7 @@
             android:id="@+id/imageView11"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            app:tint="#D8D8D8"
+            app:tint="@color/grey"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +83,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="23dp"
             android:text="Not Visited"
-            android:textColor="#d8d8d8"
+            android:textColor="@color/grey"
             android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@+id/imageView11"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -94,7 +94,7 @@
             android:layout_height="25dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="128dp"
-            app:tint="#F704E1"
+            app:tint="@color/pink"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView10"
             app:srcCompat="@drawable/circle" />
@@ -106,7 +106,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="23dp"
             android:text="Review"
-            android:textColor="#F704E1"
+            android:textColor="@color/pink"
             android:textSize="15sp"
             app:layout_constraintStart_toEndOf="@+id/imageView12"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -124,6 +124,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView11" />
 
         <GridView
+            android:id="@+id/quesListGridView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center"

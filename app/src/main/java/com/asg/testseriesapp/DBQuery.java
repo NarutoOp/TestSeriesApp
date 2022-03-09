@@ -28,6 +28,12 @@ public class DBQuery {
     public static int g_selected_test_index = 0;
     public static List<Question> g_questionList = new ArrayList<>();
 
+    public static final int NOT_VISITED = 0;
+    public static final int UNANSWERED = 1;
+    public static final int ANSWERED = 2;
+    public static final int REVIEW = 3;
+
+
     public static void createUserData(String email,String name, MyCompleteListener myCompleteListener){
 
         Map<String, Object> userData = new ArrayMap<>();
@@ -157,7 +163,8 @@ public class DBQuery {
                                     doc.getString("c"),
                                     doc.getString("d"),
                                     doc.getLong("answer").intValue(),
-                                    -1
+                                    -1,
+                                    NOT_VISITED
                             ));
                         }
 

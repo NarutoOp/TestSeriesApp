@@ -1,5 +1,10 @@
 package com.asg.testseriesapp;
 
+import static com.asg.testseriesapp.DBQuery.ANSWERED;
+import static com.asg.testseriesapp.DBQuery.REVIEW;
+import static com.asg.testseriesapp.DBQuery.UNANSWERED;
+import static com.asg.testseriesapp.DBQuery.g_questionList;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,27 +106,34 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
                 btn.setBackgroundResource(R.drawable.option_selected);
                 DBQuery.g_questionList.get(quesID).setSelectedAns(optionNum);
 
+                changeStatus(quesID, ANSWERED);
                 prevSelectedB = btn;
             }
             else{
                 if(prevSelectedB.getId() == btn.getId()){
-
                     btn.setBackgroundResource(R.drawable.option_unselected);
                     DBQuery.g_questionList.get(quesID).setSelectedAns(-1);
+                    changeStatus(quesID, UNANSWERED);
                     prevSelectedB = null;
 
                 }else {
-
                     prevSelectedB.setBackgroundResource(R.drawable.option_unselected);
                     btn.setBackgroundResource(R.drawable.option_selected);
                     DBQuery.g_questionList.get(quesID).setSelectedAns(optionNum);
+                    changeStatus(quesID, ANSWERED);
                     prevSelectedB = btn;
-
                 }
 
             }
 
         }
+
+        private void changeStatus(int id, int status){
+            if(g_questionList.get(id).getStatus() != REVIEW){
+                g_questionList.get(id).setStatus(status);
+            }
+        }
+
 
         private void setOption(TextView btn, int optionNum, int quesID){
             if( DBQuery.g_questionList.get(quesID).getSelectedAns() == optionNum){
