@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.SnapHelper;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -48,6 +49,7 @@ public class McqActivity extends AppCompatActivity {
         setContentView(R.layout.questions_list_layout);
 
         init();
+
 
         quesAdapter = new QuestionsAdapter(g_questionList);
         questionsView.setAdapter(quesAdapter);
