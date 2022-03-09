@@ -5,6 +5,7 @@ import static com.asg.testseriesapp.DBQuery.NOT_VISITED;
 import static com.asg.testseriesapp.DBQuery.REVIEW;
 import static com.asg.testseriesapp.DBQuery.UNANSWERED;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +19,11 @@ import androidx.core.content.ContextCompat;
 public class QuestionGridAdapter extends BaseAdapter {
 
     private int noOfQues;
+    private Context context;
 
-    public QuestionGridAdapter(int noOfQues) {
+    public QuestionGridAdapter(Context context, int noOfQues)
+    {
+        this.context = context;
         this.noOfQues = noOfQues;
     }
 
@@ -39,7 +43,7 @@ public class QuestionGridAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         View myview;
 
         if(view == null)
@@ -50,7 +54,9 @@ public class QuestionGridAdapter extends BaseAdapter {
         myview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                if(context instanceof McqActivity){
+                    ((McqActivity)context).goToQuestion(i);
+                }
             }
         });
 

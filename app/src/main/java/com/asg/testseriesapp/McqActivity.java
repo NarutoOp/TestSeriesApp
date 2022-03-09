@@ -56,7 +56,7 @@ public class McqActivity extends AppCompatActivity {
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         questionsView.setLayoutManager(layoutManager);
 
-        gridAdapter = new QuestionGridAdapter(g_questionList.size());
+        gridAdapter = new QuestionGridAdapter(this, g_questionList.size());
         quesListGV.setAdapter(gridAdapter);
 
         setSnapHelper();
@@ -162,6 +162,13 @@ public class McqActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void goToQuestion(int position){
+        questionsView.smoothScrollToPosition(position);
+
+        if(drawerLayout.isDrawerOpen(GravityCompat.END))
+            drawerLayout.closeDrawer(GravityCompat.END);
     }
 
     private void init()
