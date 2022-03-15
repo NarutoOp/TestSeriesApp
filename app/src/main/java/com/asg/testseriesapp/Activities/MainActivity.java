@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.asg.testseriesapp.Fragments.AccountFragment;
 import com.asg.testseriesapp.Fragments.HomeFragment;
-import com.asg.testseriesapp.LeaderboardsFragment;
+import com.asg.testseriesapp.Fragments.LeaderboardsFragment;
 import com.asg.testseriesapp.R;
 import com.asg.testseriesapp.databinding.ActivityMainBinding;
 
@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("Categories");
 
         setContentView(binding.getRoot());
 

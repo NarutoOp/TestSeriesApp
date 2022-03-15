@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.asg.testseriesapp.Activities.MainActivity;
 import com.asg.testseriesapp.CategoryAdapter;
 import com.asg.testseriesapp.Helpers.DBQuery;
 import com.asg.testseriesapp.databinding.FragmentHomeBinding;
@@ -37,7 +38,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
-//        loadCategories();
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("Categories");
 
         CategoryAdapter adapter = new CategoryAdapter(getContext(), DBQuery.g_categoryList);
 
