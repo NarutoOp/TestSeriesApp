@@ -14,6 +14,7 @@ import android.widget.Toolbar;
 
 import com.asg.testseriesapp.Activities.LoginActivity;
 import com.asg.testseriesapp.Activities.MainActivity;
+import com.asg.testseriesapp.Activities.MyProfileActivity;
 import com.asg.testseriesapp.Helpers.DBQuery;
 import com.asg.testseriesapp.R;
 import com.asg.testseriesapp.databinding.FragmentAccountBinding;
@@ -80,6 +81,8 @@ public class AccountFragment extends Fragment {
         binding.profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getContext(), MyProfileActivity.class);
+                startActivity(intent);
 
             }
         });

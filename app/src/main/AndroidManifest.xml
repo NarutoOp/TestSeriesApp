@@ -13,6 +13,9 @@
         android:theme="@style/Theme.TestSeriesApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activities.MyProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.StartTestActivity"
             android:exported="false" />
         <activity
