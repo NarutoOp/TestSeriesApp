@@ -1,4 +1,4 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,10 +10,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.asg.testseriesapp.Adapters.TestAdapter;
+import com.asg.testseriesapp.Helpers.DBQuery;
+import com.asg.testseriesapp.Helpers.MyCompleteListener;
 import com.asg.testseriesapp.databinding.ActivityTestBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -46,8 +46,20 @@ public class TestActivity extends AppCompatActivity {
         DBQuery.loadTestData(new MyCompleteListener() {
             @Override
             public void onSuccess() {
-                TestAdapter adapter = new TestAdapter(TestActivity.this,DBQuery.g_testList);
-                binding.testRecyclerView.setAdapter(adapter);
+                DBQuery.loadMyScores(new MyCompleteListener() {
+                    @Override
+                    public void onSuccess() {
+                        TestAdapter adapter = new TestAdapter(TestActivity.this,DBQuery.g_testList);
+                        binding.testRecyclerView.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        Toast.makeText(TestActivity.this, "Something went wrong please try again later ||", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
             }
 
             @Override

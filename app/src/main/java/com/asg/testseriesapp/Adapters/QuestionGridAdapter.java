@@ -1,9 +1,9 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Adapters;
 
-import static com.asg.testseriesapp.DBQuery.ANSWERED;
-import static com.asg.testseriesapp.DBQuery.NOT_VISITED;
-import static com.asg.testseriesapp.DBQuery.REVIEW;
-import static com.asg.testseriesapp.DBQuery.UNANSWERED;
+import static com.asg.testseriesapp.Helpers.DBQuery.ANSWERED;
+import static com.asg.testseriesapp.Helpers.DBQuery.NOT_VISITED;
+import static com.asg.testseriesapp.Helpers.DBQuery.REVIEW;
+import static com.asg.testseriesapp.Helpers.DBQuery.UNANSWERED;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -11,10 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
+
+import com.asg.testseriesapp.Helpers.DBQuery;
+import com.asg.testseriesapp.Activities.McqActivity;
+import com.asg.testseriesapp.R;
 
 public class QuestionGridAdapter extends BaseAdapter {
 

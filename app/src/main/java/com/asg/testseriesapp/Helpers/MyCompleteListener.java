@@ -1,4 +1,4 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Helpers;
 
 public interface MyCompleteListener {
     void onSuccess();

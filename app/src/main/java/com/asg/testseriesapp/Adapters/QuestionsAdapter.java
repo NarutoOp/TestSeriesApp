@@ -1,9 +1,9 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Adapters;
 
-import static com.asg.testseriesapp.DBQuery.ANSWERED;
-import static com.asg.testseriesapp.DBQuery.REVIEW;
-import static com.asg.testseriesapp.DBQuery.UNANSWERED;
-import static com.asg.testseriesapp.DBQuery.g_questionList;
+import static com.asg.testseriesapp.Helpers.DBQuery.ANSWERED;
+import static com.asg.testseriesapp.Helpers.DBQuery.REVIEW;
+import static com.asg.testseriesapp.Helpers.DBQuery.UNANSWERED;
+import static com.asg.testseriesapp.Helpers.DBQuery.g_questionList;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +13,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.asg.testseriesapp.Helpers.DBQuery;
+import com.asg.testseriesapp.Models.QuestionModel;
+import com.asg.testseriesapp.R;
+
 import java.util.List;
 
 public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.QuestionsViewHolder> {
 
-    private List<Question> questionList;
+    private List<QuestionModel> questionList;
 
-    public QuestionsAdapter(List<Question> questionList) {
+    public QuestionsAdapter(List<QuestionModel> questionList) {
         this.questionList = questionList;
     }
 

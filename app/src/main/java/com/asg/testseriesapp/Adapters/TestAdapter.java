@@ -1,4 +1,4 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.asg.testseriesapp.Helpers.DBQuery;
+import com.asg.testseriesapp.Models.TestModel;
+import com.asg.testseriesapp.R;
+import com.asg.testseriesapp.Activities.StartTestActivity;
 
 import java.util.List;
 

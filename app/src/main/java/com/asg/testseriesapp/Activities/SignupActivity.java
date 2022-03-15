@@ -1,4 +1,4 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,16 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.asg.testseriesapp.Helpers.DBQuery;
+import com.asg.testseriesapp.Helpers.MyCompleteListener;
 import com.asg.testseriesapp.databinding.ActivitySignupBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -85,10 +85,10 @@ public class SignupActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess() {
 
-                                    DBQuery.loadCategories(new MyCompleteListener() {
+                                    DBQuery.loadData(new MyCompleteListener() {
                                         @Override
                                         public void onSuccess() {
-                                            Intent intent = new Intent(SignupActivity.this,MainActivity.class);
+                                            Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }

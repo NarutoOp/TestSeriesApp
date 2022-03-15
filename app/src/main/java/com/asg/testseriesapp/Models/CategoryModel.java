@@ -1,4 +1,4 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Models;
 
 public class CategoryModel {
     private String categoryId, categoryName,categoryImage;

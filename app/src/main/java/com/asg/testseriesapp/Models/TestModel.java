@@ -1,4 +1,4 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Models;
 
 public class TestModel {
     private String testID;

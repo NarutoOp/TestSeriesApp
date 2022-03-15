@@ -1,9 +1,14 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Helpers;
 
 import android.util.ArrayMap;
 
 import androidx.annotation.NonNull;
 
+import com.asg.testseriesapp.Models.CategoryModel;
+import com.asg.testseriesapp.Models.ProfileModel;
+import com.asg.testseriesapp.Models.QuestionModel;
+import com.asg.testseriesapp.Models.RankModel;
+import com.asg.testseriesapp.Models.TestModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -13,6 +18,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.WriteBatch;
 
 import java.util.ArrayList;
@@ -26,7 +32,11 @@ public class DBQuery {
     public static List<TestModel> g_testList = new ArrayList<>();
     public static int g_selected_cat_index = 0;
     public static int g_selected_test_index = 0;
-    public static List<Question> g_questionList = new ArrayList<>();
+    public static List<QuestionModel> g_questionList = new ArrayList<>();
+
+    public static RankModel myPerformance = new RankModel(0, -1);
+
+    public static ProfileModel myProfile = new ProfileModel("NA", null);
 
     public static final int NOT_VISITED = 0;
     public static final int UNANSWERED = 1;
@@ -64,6 +74,71 @@ public class DBQuery {
                         myCompleteListener.onFailure();
                     }
                 });
+    }
+
+    public  static void loadMyScores(MyCompleteListener completeListener){
+        g_firestore.collection("users").document(FirebaseAuth.getInstance().getUid())
+                .collection("userData").document("myScores")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        for(int i=0; i<g_testList.size(); i++){
+                            int top=0;
+                            if(documentSnapshot.get(g_testList.get(i).getTestID()) != null){
+                                top = documentSnapshot.getLong(g_testList.get(i).getTestID()).intValue();
+                            }
+
+                            g_testList.get(i).setTopScore(top);
+                        }
+
+                        completeListener.onSuccess();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        completeListener.onFailure();
+                    }
+                });
+    }
+
+    public static void saveResult(int score, MyCompleteListener myCompleteListener) {
+        WriteBatch batch = g_firestore.batch();
+
+        DocumentReference userDoc = g_firestore.collection("users").document(FirebaseAuth.getInstance().getUid());
+
+        batch.update(userDoc, "totalScore", score);
+
+        if(score > g_testList.get(g_selected_test_index).getTopScore()){
+            DocumentReference scoreDoc = userDoc.collection("userData").document("myScores");
+
+            Map<String,Object> testData = new ArrayMap<>();
+            testData.put(g_testList.get(g_selected_test_index).getTestID(), score);
+
+            batch.set(scoreDoc, testData, SetOptions.merge());
+
+        }
+
+        batch.commit()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        if(score > g_testList.get(g_selected_test_index).getTopScore())
+                            g_testList.get(g_selected_test_index).setTopScore(score);
+
+                        myPerformance.setScore(score);
+
+                        myCompleteListener.onSuccess();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        myCompleteListener.onFailure();
+                    }
+                });
+
     }
 
     public static void loadCategories(MyCompleteListener completeListener) {
@@ -156,7 +231,7 @@ public class DBQuery {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         for(DocumentSnapshot doc: queryDocumentSnapshots){
-                            g_questionList.add(new Question(
+                            g_questionList.add(new QuestionModel(
                                     doc.getString("question"),
                                     doc.getString("a"),
                                     doc.getString("b"),
@@ -175,6 +250,42 @@ public class DBQuery {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         myCompleteListener.onFailure();
+                    }
+                });
+    }
+
+    public static void loadData(final MyCompleteListener completeListener){
+        loadCategories(new MyCompleteListener() {
+            @Override
+            public void onSuccess() {
+                getUserData(completeListener);
+            }
+
+            @Override
+            public void onFailure() {
+                completeListener.onFailure();
+            }
+        });
+    }
+
+    public static void getUserData(final MyCompleteListener completeListener){
+        g_firestore.collection("users").document(FirebaseAuth.getInstance().getUid())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        myProfile.setName(documentSnapshot.getString("name"));
+                        myProfile.setEmail(documentSnapshot.getString("email"));
+
+                        myPerformance.setScore(documentSnapshot.getLong("totalScore").intValue());
+
+                        completeListener.onSuccess();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        completeListener.onFailure();
                     }
                 });
     }

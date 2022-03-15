@@ -1,15 +1,14 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.asg.testseriesapp.Helpers.DBQuery;
+import com.asg.testseriesapp.Helpers.MyCompleteListener;
 import com.asg.testseriesapp.databinding.ActivityStartTestBinding;
 
 public class StartTestActivity extends AppCompatActivity {

@@ -1,13 +1,15 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Activities;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-
+import com.asg.testseriesapp.Fragments.AccountFragment;
+import com.asg.testseriesapp.Fragments.HomeFragment;
+import com.asg.testseriesapp.LeaderboardsFragment;
+import com.asg.testseriesapp.R;
 import com.asg.testseriesapp.databinding.ActivityMainBinding;
-
-import java.util.ArrayList;
 
 import me.ibrahimsn.lib.OnItemSelectedListener;
 
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         break;
                     case 2:
-                        transaction.replace(R.id.content, new ProfileFragment());
+                        transaction.replace(R.id.content, new AccountFragment());
                         transaction.commit();
                         break;
                 }

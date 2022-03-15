@@ -1,4 +1,4 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Fragments;
 
 import android.os.Bundle;
 
@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.asg.testseriesapp.CategoryAdapter;
+import com.asg.testseriesapp.Helpers.DBQuery;
 import com.asg.testseriesapp.databinding.FragmentHomeBinding;
-
-import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 

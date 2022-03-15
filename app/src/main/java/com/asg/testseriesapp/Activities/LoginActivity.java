@@ -1,4 +1,4 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.asg.testseriesapp.Helpers.DBQuery;
+import com.asg.testseriesapp.Helpers.MyCompleteListener;
 import com.asg.testseriesapp.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -83,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 dialog.dismiss();
                 if(task.isSuccessful()) {
-                    DBQuery.loadCategories(new MyCompleteListener() {
+                    DBQuery.loadData(new MyCompleteListener() {
                         @Override
                         public void onSuccess() {
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));

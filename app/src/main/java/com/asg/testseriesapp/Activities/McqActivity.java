@@ -1,10 +1,12 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Activities;
 
-import static com.asg.testseriesapp.DBQuery.ANSWERED;
-import static com.asg.testseriesapp.DBQuery.NOT_VISITED;
-import static com.asg.testseriesapp.DBQuery.REVIEW;
-import static com.asg.testseriesapp.DBQuery.UNANSWERED;
-import static com.asg.testseriesapp.DBQuery.g_questionList;
+import static com.asg.testseriesapp.Helpers.DBQuery.ANSWERED;
+import static com.asg.testseriesapp.Helpers.DBQuery.NOT_VISITED;
+import static com.asg.testseriesapp.Helpers.DBQuery.REVIEW;
+import static com.asg.testseriesapp.Helpers.DBQuery.UNANSWERED;
+import static com.asg.testseriesapp.Helpers.DBQuery.g_questionList;
+import static com.asg.testseriesapp.Helpers.DBQuery.g_selected_test_index;
+import static com.asg.testseriesapp.Helpers.DBQuery.g_testList;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -19,7 +21,6 @@ import androidx.recyclerview.widget.SnapHelper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -27,13 +28,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.asg.testseriesapp.Adapters.QuestionGridAdapter;
+import com.asg.testseriesapp.Adapters.QuestionsAdapter;
+import com.asg.testseriesapp.Helpers.DBQuery;
+import com.asg.testseriesapp.Models.QuestionModel;
+import com.asg.testseriesapp.R;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class McqActivity extends AppCompatActivity {
 
 
-    List<Question> questions = g_questionList;
+    List<QuestionModel> questions = g_questionList;
     private int questionNum;
     QuestionsAdapter quesAdapter;
     private DrawerLayout drawerLayout;
@@ -44,7 +51,9 @@ public class McqActivity extends AppCompatActivity {
     private Button markBtn, clearSelection, submitTestBtn;
     private GridView quesListGV;
     private QuestionGridAdapter gridAdapter;
-    CountDownTimer timer;
+    private CountDownTimer timer;
+    private long timeLeft;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +88,8 @@ public class McqActivity extends AppCompatActivity {
             @Override
             public void onTick(long remainingTime) {
 
+                timeLeft = remainingTime;
+
                 String time = String.format("%02d:%02d min",
                         TimeUnit.MILLISECONDS.toMinutes(remainingTime),
                         TimeUnit.MILLISECONDS.toSeconds(remainingTime) -
@@ -92,6 +103,8 @@ public class McqActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 Intent intent = new Intent(McqActivity.this, ScoreActivity.class);
+                long totalTime = g_testList.get(g_selected_test_index).getTime()*60*1000;
+                intent.putExtra("TIME_TAKEN", totalTime - timeLeft);
                 startActivity(intent);
                 McqActivity.this.finish();
             }
@@ -204,6 +217,8 @@ public class McqActivity extends AppCompatActivity {
                 alertDialog.dismiss();
 
                 Intent intent = new Intent(McqActivity.this, ScoreActivity.class);
+                long totalTime = g_testList.get(g_selected_test_index).getTime()*60*1000;
+                intent.putExtra("TIME_TAKEN", totalTime - timeLeft);
                 startActivity(intent);
                 McqActivity.this.finish();
             }

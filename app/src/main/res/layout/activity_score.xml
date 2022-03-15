@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScoreActivity">
+    tools:context=".Activities.ScoreActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -321,6 +321,7 @@
             android:drawableTint="@color/colorPrimary"
             android:drawablePadding="16dp"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
             android:elevation="5dp"
             android:translationZ="3dp"
             android:stateListAnimator="@null"
@@ -339,7 +340,7 @@
         >
 
         <Button
-            android:id="@+id/reAttempt"
+            android:id="@+id/reAttemptBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"

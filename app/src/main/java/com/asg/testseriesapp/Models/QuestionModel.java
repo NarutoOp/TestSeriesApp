@@ -1,10 +1,10 @@
-package com.asg.testseriesapp;
+package com.asg.testseriesapp.Models;
 
-public class Question {
+public class QuestionModel {
     private String question, option1, option2, option3, option4;
     private int answer, selectedAns, status;
 
-    public Question(String question, String option1, String option2, String option3, String option4, int answer, int selectedAns, int status) {
+    public QuestionModel(String question, String option1, String option2, String option3, String option4, int answer, int selectedAns, int status) {
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;
