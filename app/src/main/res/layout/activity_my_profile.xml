@@ -32,6 +32,7 @@
         >
 
         <TextView
+            android:id="@+id/profileText"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:gravity="center"
@@ -158,6 +159,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/btnLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -167,6 +169,7 @@
         >
 
         <Button
+            android:id="@+id/cancelBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
@@ -182,6 +185,7 @@
             />
 
         <Button
+            android:id="@+id/saveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Save"
