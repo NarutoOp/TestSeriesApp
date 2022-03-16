@@ -31,6 +31,7 @@
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/drawable/textbox.xml" value="0.1045" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/font/roboto_bold.xml" value="0.140625" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/font/roboto_medium.xml" value="0.1935185185185185" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/activity_answers.xml" value="0.17798913043478262" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/activity_login.xml" value="0.2151268115942029" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/activity_mcq.xml" value="0.16" />
@@ -41,6 +42,7 @@
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/activity_start_test.xml" value="0.2" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/activity_test.xml" value="0.2" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/alert_dialog_layout.xml" value="0.264" />
+        <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/answer_item_layout.xml" value="0.264" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/fragment_account.xml" value="0.264" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/zinga/AndroidStudioProjects/TestSeriesApp/app/src/main/res/layout/fragment_leaderboards.xml" value="0.264" />
