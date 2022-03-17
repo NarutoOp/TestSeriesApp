@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.asg.testseriesapp.Activities.BookMarksActivity;
 import com.asg.testseriesapp.Activities.LoginActivity;
 import com.asg.testseriesapp.Activities.MainActivity;
 import com.asg.testseriesapp.Activities.MyProfileActivity;
@@ -121,6 +122,9 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                Intent intent = new Intent(getContext(), BookMarksActivity.class);
+                startActivity(intent);
+
             }
         });
 
@@ -129,7 +133,6 @@ public class AccountFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), MyProfileActivity.class);
                 startActivity(intent);
-
             }
         });
 

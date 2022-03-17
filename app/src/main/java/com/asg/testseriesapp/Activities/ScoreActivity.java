@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.asg.testseriesapp.Helpers.DBQuery;
 import com.asg.testseriesapp.Helpers.MyCompleteListener;
+import com.asg.testseriesapp.Models.QuestionModel;
 import com.asg.testseriesapp.databinding.ActivityScoreBinding;
 
 import java.util.concurrent.TimeUnit;
@@ -30,6 +31,8 @@ public class ScoreActivity extends AppCompatActivity {
 //        init();
 
         loadData();
+
+        setBookmarks();
 
         binding.viewAnswerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +110,26 @@ public class ScoreActivity extends AppCompatActivity {
                 Toast.makeText(ScoreActivity.this, "Something went wrong ! Please try again later.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void setBookmarks(){
+        for(int i=0; i<DBQuery.g_questionList.size(); i++){
+
+            QuestionModel question = DBQuery.g_questionList.get(i);
+
+            if(question.isBookmarked()){
+                if( ! DBQuery.g_bookmarkIdList.contains(question.getqID())){
+                    DBQuery.g_bookmarkIdList.add(question.getqID());
+                    DBQuery.myProfile.setBookmarksCount(DBQuery.g_bookmarkIdList.size());
+                }
+            }
+            else{
+                if(DBQuery.g_bookmarkIdList.contains(question.getqID())){
+                    DBQuery.g_bookmarkIdList.remove(question.getqID());
+                    DBQuery.myProfile.setBookmarksCount(DBQuery.g_bookmarkIdList.size());
+                }
+            }
+        }
     }
 
     @Override

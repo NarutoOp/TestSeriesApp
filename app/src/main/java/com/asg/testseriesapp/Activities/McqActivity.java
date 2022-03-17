@@ -188,6 +188,13 @@ public class McqActivity extends AppCompatActivity {
                 submitTest();
             }
         });
+
+        qa_bookmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addToBookmark();
+            }
+        });
     }
 
     private void submitTest(){
@@ -258,6 +265,12 @@ public class McqActivity extends AppCompatActivity {
         mcqCatName.setText(DBQuery.g_categoryList.get(DBQuery.g_selected_cat_index).getCategoryName());
 
         g_questionList.get(0).setStatus(UNANSWERED);
+
+        if(g_questionList.get(0).isBookmarked()){
+            qa_bookmark.setImageResource(R.drawable.bookmark_selected);
+        }else{
+            qa_bookmark.setImageResource(R.drawable.bookmark);
+        }
     }
 
     private void setSnapHelper()
@@ -282,6 +295,12 @@ public class McqActivity extends AppCompatActivity {
                     markImage.setVisibility(View.GONE);
 
                 questionCounter.setText(String.format("%d/%d", (questionNum+1), questions.size()));
+
+                if(g_questionList.get(questionNum).isBookmarked()){
+                    qa_bookmark.setImageResource(R.drawable.bookmark_selected);
+                }else{
+                    qa_bookmark.setImageResource(R.drawable.bookmark);
+                }
             }
 
             @Override
@@ -290,5 +309,16 @@ public class McqActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    private void addToBookmark(){
+
+        if(g_questionList.get(questionNum).isBookmarked()){
+            g_questionList.get(questionNum).setBookmarked(false);
+            qa_bookmark.setImageResource(R.drawable.bookmark);
+        }else {
+            g_questionList.get(questionNum).setBookmarked(true);
+            qa_bookmark.setImageResource(R.drawable.bookmark_selected);
+        }
     }
 }

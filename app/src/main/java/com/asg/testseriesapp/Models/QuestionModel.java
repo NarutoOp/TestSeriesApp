@@ -1,10 +1,12 @@
 package com.asg.testseriesapp.Models;
 
-public class QuestionModel {
-    private String question, option1, option2, option3, option4;
+public class  QuestionModel {
+    private String qID, question, option1, option2, option3, option4;
     private int answer, selectedAns, status;
+    private boolean isBookmarked;
 
-    public QuestionModel(String question, String option1, String option2, String option3, String option4, int answer, int selectedAns, int status) {
+    public QuestionModel(String qID, String question, String option1, String option2, String option3, String option4, int answer, int selectedAns, int status, boolean isBookmarked) {
+        this.qID = qID;
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;
@@ -13,6 +15,23 @@ public class QuestionModel {
         this.answer = answer;
         this.selectedAns = selectedAns;
         this.status = status;
+        this.isBookmarked = isBookmarked;
+    }
+
+    public String getqID() {
+        return qID;
+    }
+
+    public void setqID(String qID) {
+        this.qID = qID;
+    }
+
+    public boolean isBookmarked() {
+        return isBookmarked;
+    }
+
+    public void setBookmarked(boolean bookmarked) {
+        isBookmarked = bookmarked;
     }
 
     public int getStatus() {
