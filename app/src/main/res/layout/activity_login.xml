@@ -9,13 +9,13 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="250dp"
-        android:layout_height="150dp"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/quizmelogo" />
+        app:srcCompat="@drawable/img" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -94,8 +94,10 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="right"
-                android:text="Forgot your password?"
+                android:text=""
                 android:textSize="14sp" />
+
+<!--            Forgot your password?-->
 
             <Button
                 android:id="@+id/submitBtn"
