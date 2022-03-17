@@ -45,7 +45,6 @@ public class SignupActivity extends AppCompatActivity {
                 name = binding.nameBox.getText().toString();
                 referCode = binding.referBox.getText().toString();
 
-//                final User user = new User(name, email, pass, referCode);
                 if(validate()){
                     dialog.show();
                     signupNewUser();
