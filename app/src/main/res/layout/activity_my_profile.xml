@@ -115,12 +115,38 @@
             android:layout_marginTop="16dp"
             >
 
-            <EditText
+            <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/myProfilePhone"
-                android:hint="Phone Number"
-                android:inputType="text"
+                android:layout_height="30dp"
+                android:id="@+id/myProfileYear"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            >
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:id="@+id/myProfileBranch"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            >
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:id="@+id/myProfileSemester"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>

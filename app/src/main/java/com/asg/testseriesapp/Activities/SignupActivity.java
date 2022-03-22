@@ -152,7 +152,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 if(validate()){
                     dialog.show();
-//                    signupNewUser();
+                    signupNewUser();
                     Toast.makeText(SignupActivity.this, selectedYear+selectedSem+selectedBranch, Toast.LENGTH_SHORT).show();
                 }
 
@@ -202,7 +202,7 @@ public class SignupActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(SignupActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
 
-                            DBQuery.createUserData(email, name, new MyCompleteListener() {
+                            DBQuery.createUserData(email, name, selectedYear, selectedBranch, selectedSem, new MyCompleteListener() {
                                 @Override
                                 public void onSuccess() {
 
@@ -212,11 +212,13 @@ public class SignupActivity extends AppCompatActivity {
                                             Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                                             startActivity(intent);
                                             finish();
+                                            dialog.dismiss();
                                         }
 
                                         @Override
                                         public void onFailure() {
                                             Toast.makeText(SignupActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
                                         }
                                     });
 
@@ -226,6 +228,7 @@ public class SignupActivity extends AppCompatActivity {
                                 @Override
                                 public void onFailure() {
                                     Toast.makeText(SignupActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
                                 }
                             });
 
