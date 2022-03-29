@@ -84,7 +84,7 @@ public class AccountFragment extends Fragment {
                         }
 
                         binding.totalScore.setText("Score : " + DBQuery.myPerformance.getScore());
-                        binding.rank.setText("Rank - " + DBQuery.myPerformance.getRank());
+                        binding.rank.setText("Rank : " + DBQuery.myPerformance.getRank());
                     }
 
                     dialog.dismiss();
