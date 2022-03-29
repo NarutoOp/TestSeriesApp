@@ -38,7 +38,7 @@ public class DBQuery {
     public static List<String> g_bookmarkIdList = new ArrayList<>();
 
     public static RankModel myPerformance = new RankModel("NULL", 0, -1);
-    public static ProfileModel myProfile = new ProfileModel("NA", null, null, 0);
+    public static ProfileModel myProfile = new ProfileModel("NA", null, null, 0, null, null, null);
 
     public static int g_selected_cat_index = 0;
     public static int g_selected_test_index = 0;
@@ -53,12 +53,15 @@ public class DBQuery {
     static int tmp;
 
 
-    public static void createUserData(String email,String name, MyCompleteListener myCompleteListener){
+    public static void createUserData(String email,String name,String year, String branch, String semester, MyCompleteListener myCompleteListener){
 
         Map<String, Object> userData = new ArrayMap<>();
 
         userData.put("email",email);
         userData.put("name", name);
+        userData.put("year",year);
+        userData.put("branch",branch);
+        userData.put("semester",semester);
         userData.put("totalScore",0);
         userData.put("bookmarks",0);
 
@@ -211,6 +214,66 @@ public class DBQuery {
 
     }
 
+    public static void loadSubject(MyCompleteListener completeListener) {
+        g_categoryList.clear();
+
+        g_firestore.collection("mcq").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        Map<String, QueryDocumentSnapshot> docList = new ArrayMap<>();
+
+                        for(QueryDocumentSnapshot doc: queryDocumentSnapshots)
+                        {
+                            docList.put(doc.getId(), doc);
+                        }
+
+                        QueryDocumentSnapshot catListDoc = docList.get("categories");
+
+                        long catCount = catListDoc.getLong("count");
+
+                        for(int i=1; i<=catCount; i++){
+                            String catId = catListDoc.getString("cat" + String.valueOf(i) + "Id");
+                            QueryDocumentSnapshot catDoc = docList.get(catId);
+
+                            String year = catDoc.getString("yearId");
+                            String branch = catDoc.getString("branchId");
+                            String semester = catDoc.getString("semesterId");
+
+                            if(year.equals(myProfile.getYear())) {
+
+                                if(branch.equals(myProfile.getBranch())) {
+
+                                    if(semester.equals(myProfile.getSemester())) {
+
+                                        int noOfTest = catDoc.getLong("numberOfTest").intValue();
+
+                                        String catName = catDoc.getString("categoryName");
+
+                                        String catImage = catDoc.getString("categoryImage");
+
+                                        g_categoryList.add(new CategoryModel(catId, catName, catImage, noOfTest));
+                                    }
+                                }
+                            }
+                            else{
+                                int d = 1;
+                            }
+                        }
+
+                        completeListener.onSuccess();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        completeListener.onFailure();
+                    }
+                });
+
+    }
+
     public static void loadTestData(final MyCompleteListener myCompleteListener){
         g_testList.clear();
 
@@ -289,10 +352,10 @@ public class DBQuery {
     }
 
     public static void loadData(final MyCompleteListener completeListener){
-        loadCategories(new MyCompleteListener() {
+        getUserData(new MyCompleteListener() {
             @Override
             public void onSuccess() {
-                getUserData(new MyCompleteListener() {
+                loadSubject(new MyCompleteListener() {
                     @Override
                     public void onSuccess() {
                         getUsersCount(new MyCompleteListener() {
@@ -322,13 +385,19 @@ public class DBQuery {
         });
     }
 
-    public static void saveProfileData(String name, String phone, MyCompleteListener completeListener){
+    public static void saveProfileData(String name, String year, String branch, String semester, MyCompleteListener completeListener){
         Map<String, Object> profileData = new ArrayMap<>();
         profileData.put("name", name);
 
-        if(phone != null){
-            profileData.put("phone", phone);
-        }
+//        if(phone != null){
+//            profileData.put("phone", phone);
+//        }
+
+        profileData.put("year", year);
+        profileData.put("branch", branch);
+        profileData.put("semester", semester);
+
+
 
         g_firestore.collection("users").document(FirebaseAuth.getInstance().getUid())
                 .update(profileData)
@@ -336,9 +405,12 @@ public class DBQuery {
                     @Override
                     public void onSuccess(Void unused) {
                         myProfile.setName(name);
-                        if(phone!=null){
-                            myProfile.setPhone(phone);
-                        }
+//                        if(phone!=null){
+//                            myProfile.setPhone(phone);
+                            myProfile.setYear(year);
+                            myProfile.setBranch(branch);
+                            myProfile.setSemester(semester);
+//                        }
 
                         completeListener.onSuccess();
                     }
@@ -359,6 +431,9 @@ public class DBQuery {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         myProfile.setName(documentSnapshot.getString("name"));
                         myProfile.setEmail(documentSnapshot.getString("email"));
+                        myProfile.setYear(documentSnapshot.getString("year"));
+                        myProfile.setBranch(documentSnapshot.getString("branch"));
+                        myProfile.setSemester(documentSnapshot.getString("semester"));
 
                         if(documentSnapshot.getString("phone") != null){
                             myProfile.setPhone(documentSnapshot.getString("phone"));

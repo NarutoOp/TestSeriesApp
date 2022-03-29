@@ -52,6 +52,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/background" />
 
+
             <EditText
                 android:id="@+id/nameBox"
                 android:layout_width="match_parent"
@@ -97,19 +98,33 @@
                 android:inputType="textPassword"
                 android:padding="15dp" />
 
-            <EditText
-                android:id="@+id/referBox"
+            <Spinner
+                android:id="@+id/year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/textbox"
-                android:drawableLeft="@drawable/user"
-                android:drawablePadding="15dp"
                 android:drawableTint="@color/colorPurple"
-                android:ems="10"
-                android:hint="Refer Code"
-                android:inputType="textPersonName"
-                android:padding="15dp" />
+                />
+
+            <Spinner
+                android:id="@+id/branch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/textbox"
+                android:drawableTint="@color/colorPurple"
+                />
+
+            <Spinner
+                android:id="@+id/semester"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/textbox"
+                android:drawableTint="@color/colorPurple"
+                />
+
 
             <Button
                 android:id="@+id/createNewBtn"

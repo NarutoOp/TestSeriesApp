@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="semesterDefault">
+        <item>Select Semester</item>
+    </string-array>
+
+    <string-array name="semesterFirst">
+        <item>Select Semester</item>
+        <item>SEM 1</item>
+        <item>SEM 2</item>
+    </string-array>
+
+    <string-array name="semesterSecond">
+        <item>Select Semester</item>
+        <item>SEM 3</item>
+        <item>SEM 4</item>
+    </string-array>
+
+    <string-array name="semesterFinal">
+        <item>Select Semester</item>
+        <item>SEM 5</item>
+        <item>SEM 6</item>
+    </string-array>
+</resources>
