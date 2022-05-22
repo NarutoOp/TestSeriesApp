@@ -13,6 +13,9 @@
         android:theme="@style/Theme.TestSeriesApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Admin.AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.LoginActivity"
             android:exported="false" />
         <activity

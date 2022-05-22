@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.asg.testseriesapp.Admin.AdminActivity;
 import com.asg.testseriesapp.Helpers.DBQuery;
 import com.asg.testseriesapp.Helpers.MyCompleteListener;
 import com.asg.testseriesapp.databinding.ActivityLoginBinding;
@@ -17,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Locale;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -50,11 +53,16 @@ public class LoginActivity extends AppCompatActivity {
                 pass = binding.passwordBox.getText().toString();
 
                 dialog.show();
+                if(email.equalsIgnoreCase("admin")){
+                    dialog.dismiss();
+                    startActivity(new Intent(LoginActivity.this, AdminActivity.class));
+                    finish();
+                }
+
                 if(validate()){
                     login();
                 }
-
-
+                dialog.dismiss();
             }
         });
 
@@ -75,7 +83,6 @@ public class LoginActivity extends AppCompatActivity {
             binding.passwordBox.setError("Enter Password");
             return false;
         }
-
         return true;
     }
 
