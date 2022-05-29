@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.asg.testseriesapp.Fragments.LeaderboardsFragment;
 import com.asg.testseriesapp.Helpers.DBQuery;
 import com.asg.testseriesapp.Helpers.MyCompleteListener;
 import com.asg.testseriesapp.Models.QuestionModel;
@@ -28,6 +29,10 @@ public class ScoreActivity extends AppCompatActivity {
         binding = ActivityScoreBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("Score");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        init();
 
         loadData();

@@ -17,44 +17,4 @@
         app:srcCompat="@drawable/college_logo"
         />
 
-    <TextView
-        android:id="@+id/TV"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="Made by -"
-        android:textSize="25sp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/sujal"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Sujal Gupta"
-        android:layout_marginTop="8dp"
-        android:textSize="23sp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TV"
-        />
-
-    <TextView
-        android:id="@+id/vicky"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Vicky Vishwakarma"
-        android:layout_marginTop="8dp"
-        android:textSize="23sp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sujal"
-        />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

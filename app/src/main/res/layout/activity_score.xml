@@ -309,24 +309,24 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/leaderBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_white"
-            android:text="Check Your Ranking in Leaderboard"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
-            android:drawableRight="@drawable/ic_right"
-            android:drawableTint="@color/colorPrimary"
-            android:drawablePadding="16dp"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="16dp"
-            android:elevation="5dp"
-            android:translationZ="3dp"
-            android:stateListAnimator="@null"
-            >
-        </Button>
+<!--        <Button-->
+<!--            android:id="@+id/leaderBtn"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/color_white"-->
+<!--            android:text="Check Your Ranking in Leaderboard"-->
+<!--            android:textColor="@color/colorPrimary"-->
+<!--            android:textSize="16sp"-->
+<!--            android:drawableRight="@drawable/ic_right"-->
+<!--            android:drawableTint="@color/colorPrimary"-->
+<!--            android:drawablePadding="16dp"-->
+<!--            android:layout_marginHorizontal="16dp"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            android:elevation="5dp"-->
+<!--            android:translationZ="3dp"-->
+<!--            android:stateListAnimator="@null"-->
+<!--            >-->
+<!--        </Button>-->
 
     </LinearLayout>
 
